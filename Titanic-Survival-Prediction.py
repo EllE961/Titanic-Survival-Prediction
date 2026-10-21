@@ -1,9 +1,14 @@
+from pathlib import Path
+
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
-# Load data
-train_data = pd.read_csv("/kaggle/input/titanic/train.csv")
-test_data = pd.read_csv("/kaggle/input/titanic/test.csv")
+# Load data (Kaggle notebook path, or the local copy in data/)
+DATA_DIR = Path("/kaggle/input/titanic")
+if not DATA_DIR.exists():
+    DATA_DIR = Path(__file__).resolve().parent / "data"
+train_data = pd.read_csv(DATA_DIR / "train.csv")
+test_data = pd.read_csv(DATA_DIR / "test.csv")
 
 # Define features and target
 features = ["Pclass", "Sex", "SibSp", "Parch"]
